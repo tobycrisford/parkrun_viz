@@ -75,8 +75,13 @@ class ParkrunMetrics:
 
     def average_speed_mins_per_km(self) -> tuple[int, int, int]:
 
-        seconds_per_km = self.total_time_seconds() / self.total_distance()
+        seconds_per_km = round(self.total_time_seconds() / self.total_distance())
         return seconds_to_hours_mins_seconds(seconds_per_km)
+
+    def average_speed_mins_per_mile(self) -> tuple[int, int, int]:
+
+        seconds_per_mile = round((self.total_time_seconds() / self.total_distance()) / MILE)
+        return seconds_to_hours_mins_seconds(seconds_per_mile)
 
     def longest_gap_in_weeks(self) -> float:
         return self.results['gaps'].max() / 7

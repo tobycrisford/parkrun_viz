@@ -48,5 +48,27 @@ if st.button("Submit"):
             border=True,
         )
 
+        speed_cols = st.columns(2)
+
+        speed_cols[0].metric(
+            "Average speed",
+            f"{round(distance_metric(metrics.average_speed_km_per_hour()), 1)} {distance_unit()} / h",
+            border=True,
+        )
+
+        if miles:
+            hours, mins, seconds = metrics.average_speed_mins_per_mile()
+        else:
+            hours, mins, seconds = metrics.average_speed_mins_per_km()
+        if hours > 0:
+            disp_str = f"{hours}h {mins}m {seconds}s"
+        else:
+            disp_str = f"{mins}:{seconds}s"
+        speed_cols[1].metric(
+            "Average speed",
+            f"{disp_str} / {distance_unit()}",
+            border=True,
+        )
+
     except Exception as e:
         st.write(f"An error has occurred: {e}")
