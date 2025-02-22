@@ -28,6 +28,17 @@ def distance_unit() -> str:
     else:
         return "km"
 
+def rank_ending(n: int) -> str:
+    n_str = str(n)
+    if n_str.endswith('1'):
+        return 'st'
+    elif n_str.endswith('2'):
+        return 'nd'
+    elif n_str.endswith('3'):
+        return 'rd'
+    else:
+        return 'th'
+
 if st.button("Submit"):
     try:
 
@@ -96,6 +107,41 @@ if st.button("Submit"):
         speed_cols[1].metric(
             "Average speed",
             f"{disp_str} / {distance_unit()}",
+            border=True,
+        )
+
+        st.subheader("Events")
+
+        st.metric(
+            "Different events",
+            f"{metrics.different_event_count()}",
+            border=True,
+        )
+
+        fav_parkrun, visit_count = metrics.most_popular_parkrun()
+        st.metric(
+            "Favourite parkrun",
+            f"{fav_parkrun} ({visit_count})",
+            border=True
+        )
+
+        st.metric(
+            "First parkrun",
+            metrics.first_parkrun(),
+            border=True,
+        )
+
+        youngest_parkrun, youngest_count = metrics.youngest_event()
+        st.metric(
+            "Youngest event attended",
+            f"{youngest_parkrun} ({youngest_count}{rank_ending(youngest_count)} edition)",
+            border=True,
+        )
+
+        oldest_parkrun, oldest_count = metrics.oldest_event()
+        st.metric(
+            "Oldest event attended",
+            f"{oldest_parkrun} ({oldest_count}{rank_ending(oldest_count)} edition)",
             border=True,
         )
 
