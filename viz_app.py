@@ -36,14 +36,14 @@ if st.button("Submit"):
         agg_cols = st.columns(2)
 
         agg_cols[0].metric(
-            "Total Distance",
+            "Total distance covered during parkruns",
             f"{round(distance_metric(metrics.total_distance()), 1)} {distance_unit()}",
             border = True,
         )
 
         hours, mins, seconds = metrics.total_time()
         agg_cols[1].metric(
-            "Total Time",
+            "Total time spent running parkruns",
             f"{hours}h {mins}m {seconds}s",
             border=True,
         )
@@ -63,7 +63,7 @@ if st.button("Submit"):
         if hours > 0:
             disp_str = f"{hours}h {mins}m {seconds}s"
         else:
-            disp_str = f"{mins}:{seconds}s"
+            disp_str = f"{mins}:{seconds}"
         speed_cols[1].metric(
             "Average speed",
             f"{disp_str} / {distance_unit()}",
