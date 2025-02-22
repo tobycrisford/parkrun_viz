@@ -81,9 +81,12 @@ if st.button("Submit"):
         )
 
         st.subheader("How far would you have run from Lands End to John O Groats?")
-        points = map_viz.extract_truncated_route_from_gpx(load_gpx(), metrics.total_distance() * MILE)
+        points, distance_reached = map_viz.extract_truncated_route_from_gpx(load_gpx(), metrics.total_distance() * MILE)
         start_label = 'Lands End'
-        end_label = f"How far you would be: ({round(distance_metric(metrics.total_distance()))} {distance_unit()} from Lands End)"
+        if distance_reached:
+            end_label = f"How far you would be: ({round(distance_metric(metrics.total_distance()))} {distance_unit()} from Lands End)"
+        else:
+            end_label = "You've made it all the way to John O Groats and some!"
         m = map_viz.create_map(points, start_label, end_label)
         folium_static(m)
 

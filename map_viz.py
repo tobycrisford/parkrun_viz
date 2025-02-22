@@ -19,6 +19,7 @@ def extract_truncated_route_from_gpx(gpx, target_distance_miles):
     points = []
     cumulative_distance_miles = 0.0
     previous_point = None
+    distance_reached = False
 
     # Get points in reverse order to start from John o' Groats
     all_points = []
@@ -47,9 +48,10 @@ def extract_truncated_route_from_gpx(gpx, target_distance_miles):
             truncated_lat = previous_point.latitude + fraction_to_travel * (point.latitude - previous_point.latitude)
             truncated_lon = previous_point.longitude + fraction_to_travel * (point.longitude - previous_point.longitude)
             points.append((truncated_lat, truncated_lon)) # Insert truncated point
+            distance_reached = True
             break # Stop once target distance is reached
 
-    return points
+    return points, distance_reached
 
 
 def create_map(gpx_points, start_label: str, end_label: str):
