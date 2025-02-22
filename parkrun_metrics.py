@@ -51,6 +51,7 @@ class ParkrunMetrics:
         
         self.results = results.copy()
         self.results['Run Date'] = pd.to_datetime(self.results['Run Date'], dayfirst=True)
+        self.results['Run Number'] = self.results['Run Number'].astype(int)
         self.results.sort_values('Run Date', inplace=True)
         self._create_seconds_col()
         self._create_gap_col()
