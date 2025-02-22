@@ -104,6 +104,11 @@ class ParkrunMetrics:
 
         return longest_streak + 1
 
+    def parkruns_per_week(self) -> float:
+
+        total_weeks = (self.results['Run Date'].max() - self.results['Run Date'].min()).days / 7
+        return len(self.results) / total_weeks
+
 
     def different_event_count(self) -> int:
         return len(self.results['Event'].unique())

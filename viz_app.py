@@ -34,18 +34,45 @@ if st.button("Submit"):
         metrics = load_data(parkrunner_select)
 
         st.subheader("Totals")
-        agg_cols = st.columns(2)
+        agg_cols = st.columns(3)
 
         agg_cols[0].metric(
+            "Total parkruns",
+            f"{len(metrics.results)}",
+            border=True,
+        )
+        
+        agg_cols[1].metric(
             "Total distance covered during parkruns",
             f"{round(distance_metric(metrics.total_distance()), 1)} {distance_unit()}",
             border = True,
         )
 
         hours, mins, seconds = metrics.total_time()
-        agg_cols[1].metric(
+        agg_cols[2].metric(
             "Total time spent running parkruns",
             f"{hours}h {mins}m {seconds}s",
+            border=True,
+        )
+
+        st.subheader("Streaks")
+        streak_cols = st.columns(3)
+
+        streak_cols[0].metric(
+            "Longest streak",
+            f"{metrics.longest_streak()}",
+            border=True,
+        )
+
+        streak_cols[1].metric(
+            "Longest gap between parkruns",
+            f"{round(metrics.longest_gap_in_weeks())} wks",
+            border=True,
+        )
+
+        streak_cols[2].metric(
+            "Avg parkruns per wk",
+            f"{round(metrics.parkruns_per_week(), 2)}",
             border=True,
         )
 
