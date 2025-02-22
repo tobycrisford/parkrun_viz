@@ -9,6 +9,7 @@ Planned stats:
 - Longest consecutive week streak
 - Longest gap between parkruns
 - Number of different events
+- Parkrun attended most often
 - First parkrun attended
 - Youngest event attended
 - Oldest event attended
