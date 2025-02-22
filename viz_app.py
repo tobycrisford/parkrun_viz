@@ -7,7 +7,7 @@ from parkrun_metrics import ParkrunMetrics, MILE
 from fetch_parkrun_data import fetch_parkrun_data
 import map_viz
 
-DEBUG = True
+DEBUG = False
 GPX_FILE = 'end_to_end_example_main_route.gpx'
 
 @st.cache_data
