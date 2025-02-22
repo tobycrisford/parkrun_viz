@@ -2,11 +2,11 @@ import streamlit as st
 import pandas as pd
 
 from parkrun_metrics import ParkrunMetrics, MILE
+from fetch_parkrun_data import fetch_parkrun_data
 
 @st.cache_data
 def fetch_data(parkrunner_id: str) -> pd.DataFrame:
-    #Placeholder
-    return pd.read_csv('my_data.csv')
+    return fetch_parkrun_data(parkrunner_id)
 
 @st.cache_data
 def load_data(parkrunner_id: str) -> pd.DataFrame:
