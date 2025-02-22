@@ -71,8 +71,8 @@ if st.button("Submit"):
         )
 
         streak_cols[2].metric(
-            "Avg parkruns per wk",
-            f"{round(metrics.parkruns_per_week(), 2)}",
+            "Avg gap between parkruns",
+            f"{round(metrics.average_gap_in_weeks(), 1)} wks",
             border=True,
         )
 

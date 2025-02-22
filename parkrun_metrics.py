@@ -109,6 +109,9 @@ class ParkrunMetrics:
         total_weeks = (self.results['Run Date'].max() - self.results['Run Date'].min()).days / 7
         return len(self.results) / total_weeks
 
+    def average_gap_in_weeks(self) -> float:
+        return self.results['gaps'].mean() / 7
+
 
     def different_event_count(self) -> int:
         return len(self.results['Event'].unique())
