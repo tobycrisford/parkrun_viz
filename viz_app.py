@@ -1,10 +1,14 @@
 import streamlit as st
 import pandas as pd
+from streamlit_folium import folium_static
+import gpxpy
 
 from parkrun_metrics import ParkrunMetrics, MILE
 from fetch_parkrun_data import fetch_parkrun_data
+import map_viz
 
 DEBUG = True
+GPX_FILE = 'end_to_end_example_main_route.gpx'
 
 @st.cache_data
 def fetch_data(parkrunner_id: str) -> pd.DataFrame:
@@ -16,6 +20,11 @@ def fetch_data(parkrunner_id: str) -> pd.DataFrame:
 @st.cache_data
 def load_data(parkrunner_id: str) -> pd.DataFrame:
     return ParkrunMetrics(fetch_data(parkrunner_id))
+
+@st.cache_data
+def load_gpx():
+    with open(GPX_FILE, 'rb') as f:
+        return gpxpy.parse(f)
 
 parkrunner_select = st.text_input("Parkrunner ID (Digits, don't need leading letter)")
 miles_or_km = st.selectbox("Miles or Kilometers", ("Miles", "Kilometers"), index=1)
@@ -70,6 +79,13 @@ if st.button("Submit"):
             f"{hours}h {mins}m {seconds}s",
             border=True,
         )
+
+        st.subheader("How far would you have run from Lands End to John O Groats?")
+        points = map_viz.extract_truncated_route_from_gpx(load_gpx(), metrics.total_distance() * MILE)
+        start_label = 'Lands End'
+        end_label = f"How far you would be: ({round(distance_metric(metrics.total_distance()))} {distance_unit()} from Lands End)"
+        m = map_viz.create_map(points, start_label, end_label)
+        folium_static(m)
 
         st.subheader("Streaks")
         streak_cols = st.columns(3)
