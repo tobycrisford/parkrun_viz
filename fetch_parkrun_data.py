@@ -53,7 +53,7 @@ def fetch_table_data(url: str, table_id: str, which_table: int, sleep_time=None)
         # Find the table
         tables = soup.find_all('table', id=table_id)
         if not tables:
-            return None, "Table not found with selector: " + table_selector
+            return None, "Results table not found"
 
         table = tables[which_table]
         
