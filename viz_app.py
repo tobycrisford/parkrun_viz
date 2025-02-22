@@ -33,6 +33,7 @@ if st.button("Submit"):
 
         metrics = load_data(parkrunner_select)
 
+        st.subheader("Totals")
         agg_cols = st.columns(2)
 
         agg_cols[0].metric(
@@ -48,6 +49,7 @@ if st.button("Submit"):
             border=True,
         )
 
+        st.subheader("Speed")
         speed_cols = st.columns(2)
 
         speed_cols[0].metric(
