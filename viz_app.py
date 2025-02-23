@@ -32,7 +32,10 @@ number_of_parkruns = st.number_input("Or just enter the number of parkruns compl
 miles_or_km = st.selectbox("Miles or Kilometers", ("Miles", "Kilometers"), index=1)
 miles = miles_or_km == "Miles"
 
-st.markdown("Parkrunner ID lookup only works when running locally, due to robot detection. Code can be found [here](%s)." % "https://github.com/tobycrisford/parkrun_viz")
+st.markdown(
+    "Parkrunner ID lookup only works when running locally, due to robot detection."
+    " Code for running locally can be found [here](%s)." % "https://github.com/tobycrisford/parkrun_viz"
+)
 
 def distance_metric(dist: int | float) -> int | float:
     if miles:
